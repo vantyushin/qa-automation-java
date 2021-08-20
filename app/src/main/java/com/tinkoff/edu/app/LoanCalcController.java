@@ -1,13 +1,17 @@
 package com.tinkoff.edu.app;
 
+
 public class LoanCalcController {
     /**
      * TODO Validates and logs request.
      */
-    public static int createRequest() {
+
+    public int createRequest(LoanRequest request) { //formal
         //param validation
         // log request
-        LoanCalcLogger.log();
-        return LoanCalcService.createRequest();
+        LoanCalcLogger logger = new LoanCalcLogger();
+        logger.log(request);
+        LoanCalcService create = new LoanCalcService();
+        return create.createRequest(request);
     }
 }
