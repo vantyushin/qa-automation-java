@@ -13,6 +13,6 @@ public class LoanCalcTest {
         LoanRequest request = new LoanRequest(10, 1000);
         int requestId = controller.createRequest(request); //factual
         System.out.println(request);
-        System.out.println(requestId + "must be 1");
+        System.out.println(requestId + " must be 1");
     }
 }
