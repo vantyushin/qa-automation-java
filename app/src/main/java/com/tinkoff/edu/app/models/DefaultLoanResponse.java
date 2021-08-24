@@ -1,10 +1,12 @@
-package com.tinkoff.edu.app;
+package com.tinkoff.edu.app.models;
 
-public class LoanResponse {
+import com.tinkoff.edu.app.enums.LoanSolution;
+
+public class DefaultLoanResponse {
     private final LoanSolution solution;
 
 
-    public LoanResponse(LoanSolution solution) {
+    public DefaultLoanResponse(LoanSolution solution) {
         this.solution = solution;
     }
 

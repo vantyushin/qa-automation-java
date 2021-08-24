@@ -1,13 +1,13 @@
-package com.tinkoff.edu.app;
+package com.tinkoff.edu.app.models;
 
 /**
  * Class, Type -> objects, instances
  */
-public class LoanRequest {
+public class DefaultLoanRequest {
     private final int months; //stateful + immutable
     private final int amount;
 
-    public LoanRequest(int months, int amount) {
+    public DefaultLoanRequest(int months, int amount) {
         this.months = months;
         this.amount = amount;
 
