@@ -1,15 +1,19 @@
 package com.tinkoff.edu.app.models;
 
+import com.tinkoff.edu.app.enums.LoanSolution;
+
 /**
  * Class, Type -> objects, instances
  */
-public class DefaultLoanRequest {
+public class LoanRequest {
     private final int months; //stateful + immutable
     private final int amount;
+    private final LoanSolution solution;
 
-    public DefaultLoanRequest(int months, int amount) {
+    public LoanRequest(int months, int amount, LoanSolution solution) {
         this.months = months;
         this.amount = amount;
+        this.solution = solution;
 
     }
 

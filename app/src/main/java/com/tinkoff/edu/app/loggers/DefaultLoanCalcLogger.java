@@ -1,9 +1,9 @@
 package com.tinkoff.edu.app.loggers;
 
-import com.tinkoff.edu.app.models.DefaultLoanRequest;
+import com.tinkoff.edu.app.models.LoanRequest;
 
 public class DefaultLoanCalcLogger {
-    public void log(DefaultLoanRequest request) {
+    public void log(LoanRequest request) {
         System.out.println("calling");
     }
 }

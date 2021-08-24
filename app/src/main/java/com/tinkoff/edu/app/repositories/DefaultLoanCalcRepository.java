@@ -1,9 +1,10 @@
 package com.tinkoff.edu.app.repositories;
 
 
-import com.tinkoff.edu.app.models.DefaultLoanRequest;
+import com.tinkoff.edu.app.interfaces.LoanCalRepository;
+import com.tinkoff.edu.app.models.LoanRequest;
 
-public class DefaultLoanCalcRepository {
+public class DefaultLoanCalcRepository implements LoanCalRepository {
     private int requestId;
 
     /**
@@ -11,7 +12,7 @@ public class DefaultLoanCalcRepository {
      *
      * @return Request Id
      */
-    public int save(DefaultLoanRequest request) {
+    public int save(LoanRequest request) {
         return ++requestId;
     }
 }
