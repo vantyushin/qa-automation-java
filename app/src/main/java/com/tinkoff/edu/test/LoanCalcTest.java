@@ -1,7 +1,6 @@
 package com.tinkoff.edu.test;
 
-import com.tinkoff.edu.app.LoanCalcController;
-import com.tinkoff.edu.app.LoanRequest;
+import com.tinkoff.edu.app.*;
 
 
 /**
@@ -9,8 +8,9 @@ import com.tinkoff.edu.app.LoanRequest;
  */
 public class LoanCalcTest {
     public static void main(String... args) {
-        LoanCalcController controller = new LoanCalcController();
+        LoanCalcController controller = new LoanCalcController(new LoanCalcRepository());
         LoanRequest request = new LoanRequest(10, 1000);
+        LoanResponse response = new LoanResponse(LoanSolution.POSITIVE);
         int requestId = controller.createRequest(request); //factual
         System.out.println(request);
         System.out.println(requestId + " must be 1");

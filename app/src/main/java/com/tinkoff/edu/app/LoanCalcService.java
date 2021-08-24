@@ -1,12 +1,17 @@
 package com.tinkoff.edu.app;
 
 
-public class LoanCalcService {
+public class LoanCalcService implements LoanCalcServ {
+    private LoanCalcRepo keep;
+
+    public LoanCalcService(LoanCalcRepo keep) {
+        this.keep = keep;
+    }
+
     /**
      * TODO Loan Calculation
      */
     public int createRequest(LoanRequest request) {
-        LoanCalcRepository keep = new LoanCalcRepository();
         return keep.save(request);
     }
 }
