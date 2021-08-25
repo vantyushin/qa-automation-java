@@ -1,7 +1,10 @@
 package com.tinkoff.edu.test;
 
-import com.tinkoff.edu.app.LoanCalcController;
-import com.tinkoff.edu.app.LoanRequest;
+import com.tinkoff.edu.app.controllers.DefaultLoanCalcController;
+import com.tinkoff.edu.app.enums.LoanSolution;
+import com.tinkoff.edu.app.models.LoanRequest;
+import com.tinkoff.edu.app.repositories.DefaultLoanCalcRepository;
+import com.tinkoff.edu.app.services.DefaultLoanCalcService;
 
 
 /**
@@ -9,10 +12,11 @@ import com.tinkoff.edu.app.LoanRequest;
  */
 public class LoanCalcTest {
     public static void main(String... args) {
-        LoanCalcController controller = new LoanCalcController();
-        LoanRequest request = new LoanRequest(10, 1000);
-        int requestId = controller.createRequest(request); //factual
-        System.out.println(request);
-        System.out.println(requestId + " must be 1");
+        DefaultLoanCalcRepository loanCalcRepository = new DefaultLoanCalcRepository();
+        DefaultLoanCalcService loanCalcService = new DefaultLoanCalcService(loanCalcRepository);
+        DefaultLoanCalcController controller = new DefaultLoanCalcController(loanCalcService);
+        System.out.println(controller.createRequest(new LoanRequest(10, 10000, LoanSolution.APPROVED)));
+
     }
 }
+
