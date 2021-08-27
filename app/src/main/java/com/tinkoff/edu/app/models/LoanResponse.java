@@ -27,22 +27,6 @@ public class LoanResponse {
         this.requestId = requestId;
     }
 
-    public int responseToString() {
-        return Integer.parseInt("{\n"
-                + solution
-                + "\""
-                + ",\n"
-                + "    \"months\": "
-                + months
-                + ",\n"
-                + "    \"amount\": "
-                + amount
-                + ",\n"
-                + "    \"requestId\": "
-                + requestId
-                + "\n}");
-    }
-
     private String solution() {
         return "RQ: {" + this.solution() + " for " + "}";
     }
