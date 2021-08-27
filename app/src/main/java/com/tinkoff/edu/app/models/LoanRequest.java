@@ -6,6 +6,7 @@ import com.tinkoff.edu.app.enums.LoanSolution;
  * Class, Type -> objects, instances
  */
 public class LoanRequest {
+    public LoanRequest request;
     private final int months; //stateful + immutable
     private final int amount;
     private final LoanSolution solution;

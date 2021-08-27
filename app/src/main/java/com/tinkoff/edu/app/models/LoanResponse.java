@@ -16,27 +16,15 @@ public class LoanResponse {
         return amount;
     }
 
+    public int getRequestId() {
+        return requestId;
+    }
+
     public LoanResponse(LoanSolution solution, LoanRequest request, int requestId) {
         this.solution = solution;
         this.months = request.getMonths();
         this.amount = request.getAmount();
         this.requestId = requestId;
-    }
-
-    public String responseToString() {
-        return "{\n"
-                + solution
-                + "\""
-                + ",\n"
-                + "    \"months\": "
-                + months
-                + ",\n"
-                + "    \"amount\": "
-                + amount
-                + ",\n"
-                + "    \"requestId\": "
-                + requestId
-                + "\n}";
     }
 
     private String solution() {
