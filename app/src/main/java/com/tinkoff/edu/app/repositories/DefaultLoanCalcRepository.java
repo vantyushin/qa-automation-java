@@ -7,6 +7,14 @@ import com.tinkoff.edu.app.models.LoanRequest;
 public class DefaultLoanCalcRepository implements LoanCalRepository {
     private int requestId;
 
+    public DefaultLoanCalcRepository(int requestId) {
+        this.requestId = requestId;
+    }
+
+    public DefaultLoanCalcRepository() {
+        this(0);
+    }
+
     /**
      * TODO persist request
      *

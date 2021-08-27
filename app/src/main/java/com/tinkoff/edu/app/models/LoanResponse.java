@@ -16,6 +16,10 @@ public class LoanResponse {
         return amount;
     }
 
+    public int getRequestId() {
+        return requestId;
+    }
+
     public LoanResponse(LoanSolution solution, LoanRequest request, int requestId) {
         this.solution = solution;
         this.months = request.getMonths();
@@ -23,8 +27,8 @@ public class LoanResponse {
         this.requestId = requestId;
     }
 
-    public String responseToString() {
-        return "{\n"
+    public int responseToString() {
+        return Integer.parseInt("{\n"
                 + solution
                 + "\""
                 + ",\n"
@@ -36,7 +40,7 @@ public class LoanResponse {
                 + ",\n"
                 + "    \"requestId\": "
                 + requestId
-                + "\n}";
+                + "\n}");
     }
 
     private String solution() {
