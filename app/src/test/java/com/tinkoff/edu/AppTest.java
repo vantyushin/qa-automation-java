@@ -3,6 +3,7 @@ package com.tinkoff.edu;
 
 import com.tinkoff.edu.app.controllers.DefaultLoanCalcController;
 import com.tinkoff.edu.app.enums.LoanSolution;
+import com.tinkoff.edu.app.enums.LoanType;
 import com.tinkoff.edu.app.models.LoanRequest;
 import com.tinkoff.edu.app.models.LoanResponse;
 import com.tinkoff.edu.app.repositories.DefaultLoanCalcRepository;
@@ -15,6 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class AppTest {
     private DefaultLoanCalcController loanCalcController;
     private LoanRequest request;
+    private LoanType loanType;
 
 
     @BeforeEach
@@ -51,9 +53,30 @@ public class AppTest {
     }
 
     @Test
-    public void shouldGetApproveValidRequest(){
-        request = new LoanRequest(10, 1000, LoanSolution.APPROVED);
-     LoanResponse loanResponse = loanCalcController.createRequest(request);
-     assertEquals(new LoanResponse(LoanSolution.APPROVED), loanResponse);
+    void test1(){
+       assertEquals(shouldGetApproveValidRequest().getSolution(), request.getSolution());
+
+    }
+    public LoanResponse shouldGetApproveValidRequest() {
+
+        switch (loanType) {
+            case PERSON:
+                if (request.getAmount() <= 10000 && request.getMonths() <= 12) {
+                    return new LoanResponse(LoanSolution.APPROVED);
+                } else if (request.getAmount() > 10000 && request.getMonths() > 12) {
+                    return new LoanResponse(LoanSolution.DENIED);
+                }
+            case OOO:
+                if (request.getAmount() > 10000 && request.getMonths() < 12) {
+                    return new LoanResponse(LoanSolution.APPROVED);
+                } else if (request.getAmount() < 1000 && request.getMonths() > 12) {
+                    return new LoanResponse(LoanSolution.DENIED);
+                }
+            case IP:
+                return new LoanResponse(LoanSolution.DENIED);
+            default:
+                return new LoanResponse(LoanSolution.DENIED);
+        }
     }
 }
+

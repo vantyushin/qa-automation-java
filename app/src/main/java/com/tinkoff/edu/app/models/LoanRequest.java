@@ -1,6 +1,7 @@
 package com.tinkoff.edu.app.models;
 
 import com.tinkoff.edu.app.enums.LoanSolution;
+import com.tinkoff.edu.app.enums.LoanType;
 
 /**
  * Class, Type -> objects, instances
@@ -10,6 +11,8 @@ public class LoanRequest {
     private final int months; //stateful + immutable
     private final int amount;
     private final LoanSolution solution;
+    public LoanType loanType;
+
 
     public LoanRequest(int months, int amount, LoanSolution solution) {
         this.months = months;
@@ -24,6 +27,10 @@ public class LoanRequest {
 
     public int getAmount() {
         return amount;
+    }
+
+    public LoanSolution getSolution() {
+        return solution;
     }
 
     public String toString() {
