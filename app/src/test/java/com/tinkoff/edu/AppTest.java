@@ -49,4 +49,11 @@ public class AppTest {
         assertEquals(response.getRequestId() + 1, nResponse.getRequestId());
         //endregion
     }
+
+    @Test
+    public void shouldGetApproveValidRequest(){
+        request = new LoanRequest(10, 1000, LoanSolution.APPROVED);
+     LoanResponse loanResponse = loanCalcController.createRequest(request);
+     assertEquals(new LoanResponse(LoanSolution.APPROVED), loanResponse);
+    }
 }
