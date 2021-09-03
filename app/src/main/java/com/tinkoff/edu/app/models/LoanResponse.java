@@ -3,34 +3,37 @@ package com.tinkoff.edu.app.models;
 import com.tinkoff.edu.app.enums.LoanSolution;
 
 public class LoanResponse {
-    private final LoanSolution solution;
-    private final int months;
-    private final int amount;
-    private final int requestId;
+    private LoanSolution solution;
+    private int requestId;
 
-    public int getMonths() {
-        return months;
+    public LoanSolution getSolution() {
+        return solution;
     }
 
-    public int getAmount() {
-        return amount;
+    public void setSolution(LoanSolution solution) {
+        this.solution = solution;
     }
 
     public int getRequestId() {
         return requestId;
     }
 
-    public LoanResponse(LoanSolution solution, LoanRequest request, int requestId) {
-        this.solution = solution;
-        this.months = request.getMonths();
-        this.amount = request.getAmount();
+    public void setRequestId(int requestId) {
         this.requestId = requestId;
     }
 
-    private String solution() {
-        return "RQ: {" + this.solution() + " for " + "}";
+    public LoanResponse(LoanSolution solution, int requestId) {
+        this.solution = solution;
+        this.requestId = requestId;
     }
 }
+
+
+
+
+
+
+
 
 
 

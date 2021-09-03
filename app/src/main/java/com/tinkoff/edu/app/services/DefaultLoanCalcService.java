@@ -10,6 +10,7 @@ import com.tinkoff.edu.app.models.LoanResponse;
 public class DefaultLoanCalcService implements LoanCalcService {
     private LoanCalRepository loanCalcRepository;
 
+
     public DefaultLoanCalcService(LoanCalRepository loanCalcRepository) {
         this.loanCalcRepository = loanCalcRepository;
     }
@@ -19,13 +20,33 @@ public class DefaultLoanCalcService implements LoanCalcService {
      */
     @Override
     public LoanResponse createRequest(LoanRequest request) {
-        LoanSolution loanSolution;
+        LoanSolution loanSolution = shouldGetApproveValidRequest(request);
         int requestId = loanCalcRepository.save(request);
-        if (request.getAmount() < 10000) {
-            loanSolution = LoanSolution.APPROVED;
-        } else {
-            loanSolution = LoanSolution.DENIED;
-        }
-        return new LoanResponse(loanSolution, request, requestId);
+        return new LoanResponse(loanSolution, requestId);
     }
+
+    public LoanSolution shouldGetApproveValidRequest(LoanRequest request) {
+
+        switch (request.getLoanType()) {
+            case PERSON:
+                if (request.getAmount() <= 10000 && request.getMonths() <= 12) {
+                    return LoanSolution.APPROVED;
+                } else if (request.getAmount() > 10000 && request.getMonths() > 12) {
+                    return LoanSolution.DENIED;
+                }
+            case OOO:
+                if (request.getAmount() > 10000 && request.getMonths() < 12) {
+                    return LoanSolution.APPROVED;
+                } else if (request.getAmount() < 10000 && request.getMonths() > 12) {
+                    return LoanSolution.DENIED;
+                }
+            case IP:
+                return LoanSolution.DENIED;
+            default:
+                return LoanSolution.DENIED;
+        }
+
+
+    }
+
 }
