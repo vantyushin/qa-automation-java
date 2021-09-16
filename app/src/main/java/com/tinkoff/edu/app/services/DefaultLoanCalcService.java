@@ -15,15 +15,14 @@ public class DefaultLoanCalcService implements LoanCalcService {
         this.loanCalcRepository = loanCalcRepository;
     }
 
-    /**
-     * TODO Loan Calculation
-     */
+
     @Override
     public LoanResponse createRequest(LoanRequest request) {
         LoanSolution loanSolution = shouldGetApproveValidRequest(request);
-        int requestId = loanCalcRepository.save(request);
+        int requestId = loanCalcRepository.generateUuid(request);
         return new LoanResponse(loanSolution, requestId);
     }
+
 
     public LoanSolution shouldGetApproveValidRequest(LoanRequest request) {
 
