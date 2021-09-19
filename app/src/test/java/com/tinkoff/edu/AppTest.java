@@ -158,7 +158,7 @@ public class AppTest {
         assertEquals(application.getSolution(), LoanSolution.DENIED);
 
 
-        System.out.println(repository.findApplication(application.getUuid()).getSolution());
+        //System.out.println(repository.findApplication(application.getUuid()).getSolution());
         //assertEquals(application1.getSolution(), LoanSolution.DENIED);
 
 
@@ -179,7 +179,7 @@ public class AppTest {
         assertEquals(application.getSolution(), LoanSolution.APPROVED);
 
 
-        System.out.println(repository.findApplication(application.getUuid()).getSolution());
+        //System.out.println(repository.findApplication(application.getUuid()).getSolution());
         //assertEquals(application1.getSolution(), LoanSolution.DENIED);
 
 
@@ -192,7 +192,10 @@ public class AppTest {
         LoanRequest request = new LoanRequest(10, 5000, LoanType.PERSON);
         Application application = new Application(request, repository.generateUuid(request));
         repository.saveApplication(request, application.getUuid());
-        System.out.println(loanCalcController.getApplicationId(application));
+        assertEquals(application.getUuid() + 0, application.getUuid());
+
+
+        //System.out.println(loanCalcController.getApplicationId(application));
 
 
     }

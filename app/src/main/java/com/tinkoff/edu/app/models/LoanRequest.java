@@ -8,7 +8,7 @@ import com.tinkoff.edu.app.enums.LoanType;
 public class LoanRequest {
     private final int months;
     private final int amount;
-    public LoanType loanType;
+    private LoanType loanType;
     private String name;
 
     public LoanRequest(int months, int amount, LoanType loanType) {
