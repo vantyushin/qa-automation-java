@@ -192,7 +192,7 @@ public class AppTest {
         LoanRequest request = new LoanRequest(10, 5000, LoanType.PERSON);
         Application application = new Application(request, repository.generateUuid(request));
         repository.saveApplication(request, application.getUuid());
-        assertEquals(application.getUuid() + 0, application.getUuid());
+        assertEquals(1, application.getUuid());
 
 
         //System.out.println(loanCalcController.getApplicationId(application));

@@ -1,6 +1,6 @@
 package com.tinkoff.edu.app.models;
 
-import com.tinkoff.edu.app.enums.LoanSolution;
+import com.tinkoff.edu.app.model.model.enums.LoanSolution;
 
 public class Application {
     private LoanRequest request;

@@ -1,6 +1,6 @@
 package com.tinkoff.edu.app.models;
 
-import com.tinkoff.edu.app.enums.LoanType;
+import com.tinkoff.edu.app.model.model.enums.LoanType;
 
 /**
  * Class, Type -> objects, instances
