@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>LoanCalcServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.tinkoff.edu.app.service</a> &gt; <span class="el_source">LoanCalcServiceImpl.java</span></div><h1>LoanCalcServiceImpl.java</h1><pre class="source lang-java linenums">package com.tinkoff.edu.app.service;
+
+
+import com.tinkoff.edu.app.model.Application;
+import com.tinkoff.edu.app.model.LoanRequest;
+import com.tinkoff.edu.app.model.LoanResponse;
+import com.tinkoff.edu.app.model.model.enums.LoanSolution;
+import com.tinkoff.edu.app.repository.ApplicationRepository;
+
+public class LoanCalcServiceImpl implements LoanCalcService {
+    private ApplicationRepository applicationRepository;
+
+<span class="fc" id="L13">    public LoanCalcServiceImpl(ApplicationRepository applicationRepository) {</span>
+<span class="fc" id="L14">        this.applicationRepository = applicationRepository;</span>
+<span class="fc" id="L15">    }</span>
+
+    @Override
+    public Application createApplication(LoanRequest request, int uuid) {
+<span class="fc" id="L19">        return applicationRepository.saveApplication(request, uuid);</span>
+    }
+
+    @Override
+    public LoanResponse calcLoanStatus(LoanRequest request) {
+<span class="fc" id="L24">        LoanSolution loanSolution = shouldGetApproveValidRequest(request);</span>
+<span class="fc" id="L25">        int requestId = applicationRepository.generateUuid();</span>
+<span class="fc" id="L26">        return new LoanResponse(loanSolution, requestId);</span>
+    }
+
+    @Override
+    public void changeStatus(int uuid, LoanSolution solution) {
+<span class="fc" id="L31">        Application application = applicationRepository.findById(uuid);</span>
+<span class="fc" id="L32">        application.setSolution(solution);</span>
+<span class="fc" id="L33">    }</span>
+
+    @Override
+    public Application findApplication(int uuid) {
+<span class="fc" id="L37">        return applicationRepository.findById(uuid);</span>
+    }
+
+    public LoanSolution shouldGetApproveValidRequest(LoanRequest request) {
+
+<span class="fc bfc" id="L42" title="All 4 branches covered.">        switch (request.getLoanType()) {</span>
+            case PERSON:
+<span class="pc bpc" id="L44" title="1 of 4 branches missed.">                return request.getAmount() &lt;= 10000 &amp;&amp; request.getMonths() &lt;= 12 ?</span>
+<span class="fc" id="L45">                        LoanSolution.APPROVED : LoanSolution.DENIED;</span>
+            case OOO:
+<span class="pc bpc" id="L47" title="1 of 4 branches missed.">                if (request.getAmount() &gt; 10000 &amp;&amp; request.getMonths() &lt; 12) {</span>
+<span class="fc" id="L48">                    return LoanSolution.APPROVED;</span>
+<span class="pc bpc" id="L49" title="2 of 4 branches missed.">                } else if (request.getAmount() &lt; 10000 &amp;&amp; request.getMonths() &gt; 12) {</span>
+<span class="fc" id="L50">                    return LoanSolution.DENIED;</span>
+                }
+            case IP:
+<span class="fc" id="L53">                return LoanSolution.DENIED;</span>
+            default:
+<span class="fc" id="L55">                return LoanSolution.DENIED;</span>
+        }
+
+
+    }
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

@@ -1,4 +1,4 @@
-package com.tinkoff.edu.app.models;
+package com.tinkoff.edu.app.model;
 
 import com.tinkoff.edu.app.model.model.enums.LoanType;
 
@@ -15,8 +15,6 @@ public class LoanRequest {
         this.months = months;
         this.amount = amount;
         this.loanType = loanType;
-
-
     }
 
     public int getMonths() {
@@ -31,6 +29,12 @@ public class LoanRequest {
         return loanType;
     }
 
+    public String getName() {
+        return name;
+    }
 
+    public void setName(String name) {
+        this.name = name;
+    }
 }
 

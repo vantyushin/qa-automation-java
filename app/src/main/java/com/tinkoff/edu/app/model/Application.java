@@ -1,4 +1,4 @@
-package com.tinkoff.edu.app.models;
+package com.tinkoff.edu.app.model;
 
 import com.tinkoff.edu.app.model.model.enums.LoanSolution;
 
@@ -11,8 +11,6 @@ public class Application {
     public Application(LoanRequest request, int uuid) {
         this.request = request;
         this.uuid = uuid;
-
-
     }
 
 
