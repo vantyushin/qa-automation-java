@@ -1,0 +1,545 @@
+Index: app/src/main/java/com/tinkoff/edu/app/controller/DefaultLoanCalcController.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/controller/DefaultLoanCalcController.java b/app/src/main/java/com/tinkoff/edu/app/controller/DefaultLoanCalcController.java
+new file mode 100644
+--- /dev/null	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
++++ b/app/src/main/java/com/tinkoff/edu/app/controller/DefaultLoanCalcController.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -0,0 +1,30 @@
++package com.tinkoff.edu.app.controller;
++
++
++import com.tinkoff.edu.app.model.enums.LoanSolution;
++import com.tinkoff.edu.app.service.LoanCalcService;
++import com.tinkoff.edu.app.model.LoanRequest;
++import com.tinkoff.edu.app.model.LoanResponse;
++
++public class DefaultLoanCalcController {
++    private final LoanCalcService loanCalcService;
++
++
++    public DefaultLoanCalcController(LoanCalcService loanCalcService) {
++        this.loanCalcService = loanCalcService;
++    }
++
++    public LoanResponse createRequest(LoanRequest request) {
++        return loanCalcService.createRequest(request);
++    }
++
++    public int generateApplicationId() {
++        return loanCalcService.generateApplicationId();
++    }
++
++    public void changeApplicationStatus(int uuid, LoanSolution solution) {
++        loanCalcService.changeStatus(uuid, solution);
++    }
++
++
++}
+Index: app/src/main/java/com/tinkoff/edu/app/controllers/DefaultLoanCalcController.java
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/controllers/DefaultLoanCalcController.java b/app/src/main/java/com/tinkoff/edu/app/controllers/DefaultLoanCalcController.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tinkoff/edu/app/controllers/DefaultLoanCalcController.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ /dev/null	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
+@@ -1,36 +0,0 @@
+-package com.tinkoff.edu.app.controllers;
+-
+-
+-import com.tinkoff.edu.app.enums.LoanSolution;
+-import com.tinkoff.edu.app.interfaces.LoanCalcService;
+-import com.tinkoff.edu.app.models.Application;
+-import com.tinkoff.edu.app.models.LoanRequest;
+-import com.tinkoff.edu.app.models.LoanResponse;
+-
+-public class DefaultLoanCalcController {
+-    private final LoanCalcService loanCalcService;
+-
+-
+-    public DefaultLoanCalcController(LoanCalcService loanCalcService) {
+-        this.loanCalcService = loanCalcService;
+-    }
+-
+-    public LoanResponse createRequest(LoanRequest request) {
+-        return loanCalcService.createRequest(request);
+-    }
+-
+-    public int getApplicationId(Application application) {
+-        return application.getUuid();
+-    }
+-
+-    public void changeApplication(Application application) {
+-
+-        if (application.getSolution() == LoanSolution.APPROVED) {
+-            application.setSolution(LoanSolution.DENIED);
+-        } else {
+-            application.setSolution(LoanSolution.APPROVED);
+-        }
+-    }
+-
+-
+-}
+Index: app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalRepository.java
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalRepository.java b/app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalRepository.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalRepository.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ /dev/null	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
+@@ -1,7 +0,0 @@
+-package com.tinkoff.edu.app.interfaces;
+-
+-import com.tinkoff.edu.app.models.LoanRequest;
+-
+-public interface LoanCalRepository {
+-    int generateUuid(LoanRequest request);
+-}
+Index: app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalcService.java
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalcService.java b/app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalcService.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tinkoff/edu/app/interfaces/LoanCalcService.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ /dev/null	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
+@@ -1,8 +0,0 @@
+-package com.tinkoff.edu.app.interfaces;
+-
+-import com.tinkoff.edu.app.models.LoanRequest;
+-import com.tinkoff.edu.app.models.LoanResponse;
+-
+-public interface LoanCalcService {
+-    LoanResponse createRequest(LoanRequest request);
+-}
+Index: app/src/main/java/com/tinkoff/edu/app/loggers/DefaultLoanCalcLogger.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/loggers/DefaultLoanCalcLogger.java b/app/src/main/java/com/tinkoff/edu/app/logger/DefaultLoanCalcLogger.java
+rename from app/src/main/java/com/tinkoff/edu/app/loggers/DefaultLoanCalcLogger.java
+rename to app/src/main/java/com/tinkoff/edu/app/logger/DefaultLoanCalcLogger.java
+--- a/app/src/main/java/com/tinkoff/edu/app/loggers/DefaultLoanCalcLogger.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/main/java/com/tinkoff/edu/app/logger/DefaultLoanCalcLogger.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,6 +1,6 @@
+-package com.tinkoff.edu.app.loggers;
++package com.tinkoff.edu.app.logger;
+ 
+-import com.tinkoff.edu.app.models.LoanRequest;
++import com.tinkoff.edu.app.model.LoanRequest;
+ 
+ public class DefaultLoanCalcLogger {
+     public void log(LoanRequest request) {
+Index: app/src/main/java/com/tinkoff/edu/app/models/Application.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/models/Application.java b/app/src/main/java/com/tinkoff/edu/app/model/Application.java
+rename from app/src/main/java/com/tinkoff/edu/app/models/Application.java
+rename to app/src/main/java/com/tinkoff/edu/app/model/Application.java
+--- a/app/src/main/java/com/tinkoff/edu/app/models/Application.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/main/java/com/tinkoff/edu/app/model/Application.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,6 +1,6 @@
+-package com.tinkoff.edu.app.models;
++package com.tinkoff.edu.app.model;
+ 
+-import com.tinkoff.edu.app.enums.LoanSolution;
++import com.tinkoff.edu.app.model.enums.LoanSolution;
+ 
+ public class Application {
+     private LoanRequest request;
+Index: app/src/main/java/com/tinkoff/edu/app/models/LoanRequest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/models/LoanRequest.java b/app/src/main/java/com/tinkoff/edu/app/model/LoanRequest.java
+rename from app/src/main/java/com/tinkoff/edu/app/models/LoanRequest.java
+rename to app/src/main/java/com/tinkoff/edu/app/model/LoanRequest.java
+--- a/app/src/main/java/com/tinkoff/edu/app/models/LoanRequest.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/main/java/com/tinkoff/edu/app/model/LoanRequest.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,6 +1,6 @@
+-package com.tinkoff.edu.app.models;
++package com.tinkoff.edu.app.model;
+ 
+-import com.tinkoff.edu.app.enums.LoanType;
++import com.tinkoff.edu.app.model.enums.LoanType;
+ 
+ /**
+  * Class, Type -> objects, instances
+Index: app/src/main/java/com/tinkoff/edu/app/models/LoanResponse.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/models/LoanResponse.java b/app/src/main/java/com/tinkoff/edu/app/model/LoanResponse.java
+rename from app/src/main/java/com/tinkoff/edu/app/models/LoanResponse.java
+rename to app/src/main/java/com/tinkoff/edu/app/model/LoanResponse.java
+--- a/app/src/main/java/com/tinkoff/edu/app/models/LoanResponse.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/main/java/com/tinkoff/edu/app/model/LoanResponse.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,6 +1,6 @@
+-package com.tinkoff.edu.app.models;
++package com.tinkoff.edu.app.model;
+ 
+-import com.tinkoff.edu.app.enums.LoanSolution;
++import com.tinkoff.edu.app.model.enums.LoanSolution;
+ 
+ public class LoanResponse {
+     private LoanSolution solution;
+Index: app/src/main/java/com/tinkoff/edu/app/enums/LoanSolution.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/enums/LoanSolution.java b/app/src/main/java/com/tinkoff/edu/app/model/enums/LoanSolution.java
+rename from app/src/main/java/com/tinkoff/edu/app/enums/LoanSolution.java
+rename to app/src/main/java/com/tinkoff/edu/app/model/enums/LoanSolution.java
+--- a/app/src/main/java/com/tinkoff/edu/app/enums/LoanSolution.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/main/java/com/tinkoff/edu/app/model/enums/LoanSolution.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,4 +1,4 @@
+-package com.tinkoff.edu.app.enums;
++package com.tinkoff.edu.app.model.enums;
+ 
+ public enum LoanSolution {
+     APPROVED, DENIED
+Index: app/src/main/java/com/tinkoff/edu/app/enums/LoanType.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/enums/LoanType.java b/app/src/main/java/com/tinkoff/edu/app/model/enums/LoanType.java
+rename from app/src/main/java/com/tinkoff/edu/app/enums/LoanType.java
+rename to app/src/main/java/com/tinkoff/edu/app/model/enums/LoanType.java
+--- a/app/src/main/java/com/tinkoff/edu/app/enums/LoanType.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/main/java/com/tinkoff/edu/app/model/enums/LoanType.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,4 +1,4 @@
+-package com.tinkoff.edu.app.enums;
++package com.tinkoff.edu.app.model.enums;
+ 
+ public enum LoanType {
+     PERSON, OOO, IP, SELF
+Index: app/src/main/java/com/tinkoff/edu/app/repositories/UuidLoanCalcRepository.java
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/repositories/UuidLoanCalcRepository.java b/app/src/main/java/com/tinkoff/edu/app/repositories/UuidLoanCalcRepository.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tinkoff/edu/app/repositories/UuidLoanCalcRepository.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ /dev/null	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
+@@ -1,27 +0,0 @@
+-package com.tinkoff.edu.app.repositories;
+-
+-
+-import com.tinkoff.edu.app.interfaces.LoanCalRepository;
+-import com.tinkoff.edu.app.models.Application;
+-import com.tinkoff.edu.app.models.LoanRequest;
+-
+-public class UuidLoanCalcRepository implements LoanCalRepository {
+-    private int uuid = 0;
+-
+-    Application[] applications = new Application[100000];
+-
+-
+-    public void saveApplication(LoanRequest request, int uuid) {
+-        applications[uuid] = new Application(request, uuid);
+-
+-    }
+-
+-    public Application findApplication(int uuid) {
+-        return applications[uuid];
+-    }
+-
+-
+-    public int generateUuid(LoanRequest request) {
+-        return ++uuid;
+-    }
+-}
+Index: app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepository.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepository.java b/app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepository.java
+new file mode 100644
+--- /dev/null	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
++++ b/app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepository.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -0,0 +1,12 @@
++package com.tinkoff.edu.app.repository;
++
++import com.tinkoff.edu.app.model.Application;
++import com.tinkoff.edu.app.model.LoanRequest;
++
++public interface ApplicationRepository {
++    int generateUuid();
++
++    Application findById(int uuid);
++
++    void saveApplication(LoanRequest request, int uuid);
++}
+Index: app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepositoryImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepositoryImpl.java b/app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepositoryImpl.java
+new file mode 100644
+--- /dev/null	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
++++ b/app/src/main/java/com/tinkoff/edu/app/repository/ApplicationRepositoryImpl.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -0,0 +1,25 @@
++package com.tinkoff.edu.app.repository;
++
++
++import com.tinkoff.edu.app.model.Application;
++import com.tinkoff.edu.app.model.LoanRequest;
++
++public class ApplicationRepositoryImpl implements ApplicationRepository {
++    private int uuid = 0;
++    private final Application[] applications = new Application[100000];
++
++    @Override
++    public void saveApplication(LoanRequest request, int uuid) {
++        applications[uuid] = new Application(request, uuid);
++    }
++
++    @Override
++    public Application findById(int uuid) {
++        return applications[uuid];
++    }
++
++    @Override
++    public int generateUuid() {
++        return ++uuid;
++    }
++}
+Index: app/src/main/java/com/tinkoff/edu/app/service/LoanCalcService.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/service/LoanCalcService.java b/app/src/main/java/com/tinkoff/edu/app/service/LoanCalcService.java
+new file mode 100644
+--- /dev/null	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
++++ b/app/src/main/java/com/tinkoff/edu/app/service/LoanCalcService.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -0,0 +1,13 @@
++package com.tinkoff.edu.app.service;
++
++import com.tinkoff.edu.app.model.enums.LoanSolution;
++import com.tinkoff.edu.app.model.LoanRequest;
++import com.tinkoff.edu.app.model.LoanResponse;
++
++public interface LoanCalcService {
++    LoanResponse createRequest(LoanRequest request);
++
++    void changeStatus(int uuid, LoanSolution solution);
++
++    int generateApplicationId();
++}
+Index: app/src/main/java/com/tinkoff/edu/app/service/LoanCalcServiceImpl.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/service/LoanCalcServiceImpl.java b/app/src/main/java/com/tinkoff/edu/app/service/LoanCalcServiceImpl.java
+new file mode 100644
+--- /dev/null	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
++++ b/app/src/main/java/com/tinkoff/edu/app/service/LoanCalcServiceImpl.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -0,0 +1,56 @@
++package com.tinkoff.edu.app.service;
++
++
++import com.tinkoff.edu.app.model.enums.LoanSolution;
++import com.tinkoff.edu.app.repository.ApplicationRepository;
++import com.tinkoff.edu.app.model.Application;
++import com.tinkoff.edu.app.model.LoanRequest;
++import com.tinkoff.edu.app.model.LoanResponse;
++
++public class LoanCalcServiceImpl implements LoanCalcService {
++    private ApplicationRepository applicationRepository;
++
++    public LoanCalcServiceImpl(ApplicationRepository applicationRepository) {
++        this.applicationRepository = applicationRepository;
++    }
++
++    @Override
++    public LoanResponse createRequest(LoanRequest request) {
++        LoanSolution loanSolution = shouldGetApproveValidRequest(request);
++        int requestId = applicationRepository.generateUuid();
++        return new LoanResponse(loanSolution, requestId);
++    }
++
++    @Override
++    public void changeStatus(int uuid, LoanSolution solution) {
++        Application application = applicationRepository.findById(uuid);
++        application.setSolution(solution);
++    }
++
++    @Override
++    public int generateApplicationId() {
++        return applicationRepository.generateUuid();
++    }
++
++    public LoanSolution shouldGetApproveValidRequest(LoanRequest request) {
++
++        switch (request.getLoanType()) {
++            case PERSON:
++                return request.getAmount() <= 10000 && request.getMonths() <= 12 ?
++                        LoanSolution.APPROVED : LoanSolution.DENIED;
++            case OOO:
++                if (request.getAmount() > 10000 && request.getMonths() < 12) {
++                    return LoanSolution.APPROVED;
++                } else if (request.getAmount() < 10000 && request.getMonths() > 12) {
++                    return LoanSolution.DENIED;
++                }
++            case IP:
++                return LoanSolution.DENIED;
++            default:
++                return LoanSolution.DENIED;
++        }
++
++
++    }
++
++}
+Index: app/src/main/java/com/tinkoff/edu/app/services/DefaultLoanCalcService.java
+===================================================================
+diff --git a/app/src/main/java/com/tinkoff/edu/app/services/DefaultLoanCalcService.java b/app/src/main/java/com/tinkoff/edu/app/services/DefaultLoanCalcService.java
+deleted file mode 100644
+--- a/app/src/main/java/com/tinkoff/edu/app/services/DefaultLoanCalcService.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ /dev/null	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
+@@ -1,51 +0,0 @@
+-package com.tinkoff.edu.app.services;
+-
+-
+-import com.tinkoff.edu.app.enums.LoanSolution;
+-import com.tinkoff.edu.app.interfaces.LoanCalRepository;
+-import com.tinkoff.edu.app.interfaces.LoanCalcService;
+-import com.tinkoff.edu.app.models.LoanRequest;
+-import com.tinkoff.edu.app.models.LoanResponse;
+-
+-public class DefaultLoanCalcService implements LoanCalcService {
+-    private LoanCalRepository loanCalcRepository;
+-
+-
+-    public DefaultLoanCalcService(LoanCalRepository loanCalcRepository) {
+-        this.loanCalcRepository = loanCalcRepository;
+-    }
+-
+-
+-    @Override
+-    public LoanResponse createRequest(LoanRequest request) {
+-        LoanSolution loanSolution = shouldGetApproveValidRequest(request);
+-        int requestId = loanCalcRepository.generateUuid(request);
+-        return new LoanResponse(loanSolution, requestId);
+-    }
+-
+-
+-    public LoanSolution shouldGetApproveValidRequest(LoanRequest request) {
+-
+-        switch (request.getLoanType()) {
+-            case PERSON:
+-                if (request.getAmount() <= 10000 && request.getMonths() <= 12) {
+-                    return LoanSolution.APPROVED;
+-                } else if (request.getAmount() > 10000 && request.getMonths() > 12) {
+-                    return LoanSolution.DENIED;
+-                }
+-            case OOO:
+-                if (request.getAmount() > 10000 && request.getMonths() < 12) {
+-                    return LoanSolution.APPROVED;
+-                } else if (request.getAmount() < 10000 && request.getMonths() > 12) {
+-                    return LoanSolution.DENIED;
+-                }
+-            case IP:
+-                return LoanSolution.DENIED;
+-            default:
+-                return LoanSolution.DENIED;
+-        }
+-
+-
+-    }
+-
+-}
+Index: app/src/test/java/com/tinkoff/edu/AppTest.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/test/java/com/tinkoff/edu/AppTest.java b/app/src/test/java/com/tinkoff/edu/AppTest.java
+--- a/app/src/test/java/com/tinkoff/edu/AppTest.java	(revision a9fd0ef0d61ae1898e4f1633c986d328d5f1cea7)
++++ b/app/src/test/java/com/tinkoff/edu/AppTest.java	(revision 6d515cf9dd7f18a598148f767f64e8a14e1892f7)
+@@ -1,14 +1,14 @@
+ package com.tinkoff.edu;
+ 
+ 
+-import com.tinkoff.edu.app.controllers.DefaultLoanCalcController;
+-import com.tinkoff.edu.app.enums.LoanSolution;
+-import com.tinkoff.edu.app.enums.LoanType;
+-import com.tinkoff.edu.app.models.Application;
+-import com.tinkoff.edu.app.models.LoanRequest;
+-import com.tinkoff.edu.app.models.LoanResponse;
+-import com.tinkoff.edu.app.repositories.UuidLoanCalcRepository;
+-import com.tinkoff.edu.app.services.DefaultLoanCalcService;
++import com.tinkoff.edu.app.controller.DefaultLoanCalcController;
++import com.tinkoff.edu.app.model.enums.LoanSolution;
++import com.tinkoff.edu.app.model.enums.LoanType;
++import com.tinkoff.edu.app.model.Application;
++import com.tinkoff.edu.app.model.LoanRequest;
++import com.tinkoff.edu.app.model.LoanResponse;
++import com.tinkoff.edu.app.repository.ApplicationRepositoryImpl;
++import com.tinkoff.edu.app.service.LoanCalcServiceImpl;
+ import org.junit.jupiter.api.BeforeEach;
+ import org.junit.jupiter.api.Test;
+ 
+@@ -21,8 +21,8 @@
+     @BeforeEach
+     public void init() {
+         //region Fixture | Arrange | Given
+-        UuidLoanCalcRepository loanCalcRepository = new UuidLoanCalcRepository();
+-        DefaultLoanCalcService loanCalcService = new DefaultLoanCalcService(loanCalcRepository);
++        ApplicationRepositoryImpl loanCalcRepository = new ApplicationRepositoryImpl();
++        LoanCalcServiceImpl loanCalcService = new LoanCalcServiceImpl(loanCalcRepository);
+         loanCalcController = new DefaultLoanCalcController(loanCalcService);
+ 
+         //endregion
+@@ -145,7 +145,7 @@
+ 
+     @Test
+     public void shouldSetChangeOnDeniedAndFindApplication() {
+-        UuidLoanCalcRepository repository = new UuidLoanCalcRepository();
++        ApplicationRepositoryImpl repository = new ApplicationRepositoryImpl();
+         LoanRequest request = new LoanRequest(10, 5000, LoanType.PERSON);
+         Application application = new Application(request, repository.generateUuid(request));
+         repository.saveApplication(request, application.getUuid());
+@@ -153,7 +153,7 @@
+         assertEquals(application.getSolution(), LoanSolution.APPROVED);
+ 
+ 
+-        loanCalcController.changeApplication(application);
++        loanCalcController.changeApplicationStatus(application);
+         repository.saveApplication(request, application.getUuid());
+         assertEquals(application.getSolution(), LoanSolution.DENIED);
+ 
+@@ -166,7 +166,7 @@
+ 
+     @Test
+     public void shouldSetChangeOnApprovedAndFindApplication() {
+-        UuidLoanCalcRepository repository = new UuidLoanCalcRepository();
++        ApplicationRepositoryImpl repository = new ApplicationRepositoryImpl();
+         LoanRequest request = new LoanRequest(15, 15000, LoanType.PERSON);
+         Application application = new Application(request, repository.generateUuid(request));
+         repository.saveApplication(request, application.getUuid());
+@@ -174,7 +174,7 @@
+         assertEquals(application.getSolution(), LoanSolution.DENIED);
+ 
+ 
+-        loanCalcController.changeApplication(application);
++        loanCalcController.changeApplicationStatus(application);
+         repository.saveApplication(request, application.getUuid());
+         assertEquals(application.getSolution(), LoanSolution.APPROVED);
+ 
+@@ -188,7 +188,7 @@
+ 
+     @Test
+     public void shouldGetApplicationId() {
+-        UuidLoanCalcRepository repository = new UuidLoanCalcRepository();
++        ApplicationRepositoryImpl repository = new ApplicationRepositoryImpl();
+         LoanRequest request = new LoanRequest(10, 5000, LoanType.PERSON);
+         Application application = new Application(request, repository.generateUuid(request));
+         repository.saveApplication(request, application.getUuid());

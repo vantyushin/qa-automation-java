@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="ru"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DefaultLoanCalcController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">app</a> &gt; <a href="index.source.html" class="el_package">com.tinkoff.edu.app.controller</a> &gt; <span class="el_source">DefaultLoanCalcController.java</span></div><h1>DefaultLoanCalcController.java</h1><pre class="source lang-java linenums">package com.tinkoff.edu.app.controller;
+
+
+import com.tinkoff.edu.app.model.Application;
+import com.tinkoff.edu.app.model.LoanRequest;
+import com.tinkoff.edu.app.model.LoanResponse;
+import com.tinkoff.edu.app.model.model.enums.LoanSolution;
+import com.tinkoff.edu.app.service.LoanCalcService;
+
+public class DefaultLoanCalcController {
+    private final LoanCalcService loanCalcService;
+
+
+<span class="fc" id="L14">    public DefaultLoanCalcController(LoanCalcService loanCalcService) {</span>
+<span class="fc" id="L15">        this.loanCalcService = loanCalcService;</span>
+<span class="fc" id="L16">    }</span>
+
+    public LoanResponse calcLoanStatus(LoanRequest request) {
+<span class="fc" id="L19">        return loanCalcService.calcLoanStatus(request);</span>
+    }
+
+    public Application createApplication(LoanRequest request, int uuid) {
+<span class="fc" id="L23">        return loanCalcService.createApplication(request, uuid);</span>
+    }
+
+    public void changeApplicationStatus(int uuid, LoanSolution solution) {
+<span class="fc" id="L27">        loanCalcService.changeStatus(uuid, solution);</span>
+<span class="fc" id="L28">    }</span>
+
+    public Application findApplication(int uuid) {
+<span class="fc" id="L31">        return loanCalcService.findApplication(uuid);</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>
